@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> stack;
+    stack.push_back(10);
+    stack.push_back(20);
+    stack.push_back(30);
+    stack.push_back(40);
+    stack.push_back(50);
+
+    if (stack.empty())
+        cout << "Stack is Empty" << endl;
+    else
+        cout << "Stack is Not Empty" << endl;
+
+    if (stack.size() == 5)
+        cout << "Stack is Full" << endl;
+    else
+        cout << "Stack is Not Full" << endl;
+
+    cout << "Size of stack = " << stack.size() << endl;
+
+    cout << "Stack elements are: ";
+
+    for (int i = 0; i < stack.size(); i++)
+    {
+        cout << stack[i] << " ";
+    }
+
+    cout << endl;
+    cout << "\nPushing two more elements..." << endl;
+
+    stack.push_back(60);
+    stack.push_back(70);
+
+    cout << "Stack after pushing: ";
+
+    for (int i = 0; i < stack.size(); i++)
+    {
+        cout << stack[i] << " ";
+    }
+
+    cout << endl;
+
+    cout << "\nPopping two elements..." << endl;
+
+    cout << "Popped: " << stack.back() << endl;
+    stack.pop_back();
+
+    cout << "Popped: " << stack.back() << endl;
+    stack.pop_back();
+
+    cout << "Stack after popping: ";
+
+    for (int i = 0; i < stack.size(); i++)
+    {
+        cout << stack[i] << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
