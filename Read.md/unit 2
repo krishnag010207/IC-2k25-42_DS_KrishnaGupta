@@ -1,6 +1,6 @@
 # Unit 2 – Stack
 
-## 📌 Introduction
+##  Introduction
 
 A **stack** is a linear data structure that follows the **LIFO (Last In, First Out)** principle. The element inserted last is the first element to be removed.
 
@@ -17,15 +17,15 @@ This unit contains programs demonstrating stack implementation using vectors and
 
 ---
 
-# 📂 Programs Covered
+# Programs Covered
 
 ## 1. Stack Using Vector
 
-### 📌 Problem Statement
+### Problem Statement
 
 Create a stack using a C++ vector and perform basic stack operations such as checking whether the stack is empty or full, finding its size, displaying elements, pushing multiple elements, and popping multiple elements.
 
-### 💡 Approach
+###  Approach
 
 1. Create a vector named `stack`.
 2. Insert elements using `push_back()`.
@@ -64,11 +64,11 @@ Create a stack using a C++ vector and perform basic stack operations such as che
 
 # 2. Stack Using Array
 
-### 📌 Problem Statement
+###  Problem Statement
 
 Create a stack of size `M` using an array and perform stack operations such as initialization, checking empty/full conditions, insertion, deletion, peek, and display.
 
-### 💡 Approach
+###  Approach
 
 1. Define the stack using `typedef struct stacktype`.
 2. Store the elements in an array.
@@ -79,7 +79,7 @@ Create a stack of size `M` using an array and perform stack operations such as i
 7. Check the top element using `peek()`.
 8. Display the stack using `display()`.
 
-### 🧩 Modular Functions
+###  Modular Functions
 
 ```text
 initstack()
@@ -97,7 +97,7 @@ isfull()
 display()
 ```
 
-### 📊 Example
+###  Example
 
 ```text
 Stack:
@@ -125,11 +125,11 @@ Peek = 50
 
 # 3. Two Stacks in One Array
 
-### 📌 Problem Statement
+###  Problem Statement
 
 Implement two stacks using a single array of size `M`.
 
-### 💡 Approach
+### Approach
 
 Two stacks share the same array.
 
@@ -138,7 +138,7 @@ Two stacks share the same array.
 * `top1` keeps track of Stack 1.
 * `top2` keeps track of Stack 2.
 
-### 📊 Representation
+### Representation
 
 ```text
 Stack 1 → → →          ← ← ← Stack 2
@@ -148,7 +148,7 @@ Stack 1 → → →          ← ← ← Stack 2
     top1                            top2
 ```
 
-### 🧩 Functions Used
+###  Functions Used
 
 * `initstack()`
 * `isempty1()`
@@ -161,7 +161,7 @@ Stack 1 → → →          ← ← ← Stack 2
 * `display1()`
 * `display2()`
 
-### 📌 Full Condition
+###  Full Condition
 
 The array is full when:
 
@@ -169,7 +169,7 @@ The array is full when:
 top1 + 1 == top2
 ```
 
-### ⏱️ Complexity
+### Complexity
 
 | Operation        | Time Complexity |
 | ---------------- | --------------: |
@@ -184,11 +184,11 @@ top1 + 1 == top2
 
 # 4. Character Stack and Peek
 
-### 📌 Problem Statement
+###  Problem Statement
 
 Create a stack of size `M`, insert the characters `A`, `B`, `C`, `D`, and `E`, and find the peek element.
 
-### 💡 Approach
+###  Approach
 
 1. Create a character stack using `typedef struct stacktype`.
 2. Initialize `top` to `-1`.
@@ -196,7 +196,7 @@ Create a stack of size `M`, insert the characters `A`, `B`, `C`, `D`, and `E`, a
 4. Display the stack.
 5. Use `peek()` to find the top element.
 
-### 📊 Example
+###  Example
 
 ```text
 Stack elements:
@@ -222,7 +222,7 @@ Since `E` is inserted last, it is the top/peek element.
 
 ---
 
-# 📊 Overall Complexity Summary
+#  Overall Complexity Summary
 
 | Program                 | Main Operations | Time Complexity |
 | ----------------------- | --------------- | --------------: |
@@ -238,7 +238,7 @@ Since `E` is inserted last, it is the top/peek element.
 
 ---
 
-# 🎯 Learning Outcomes
+#  Learning Outcomes
 
 After completing Unit 2, I learned:
 
