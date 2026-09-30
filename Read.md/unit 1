@@ -182,9 +182,6 @@ Therefore, `C` is the greatest element.
 
 ---
 
-## 📸 Screenshots
-
-Screenshots of program outputs are stored in the `Screenshots` folder.
 
 Example:
 
@@ -229,27 +226,6 @@ After completing Unit 1, I learned:
 * How to find the greatest element in an array.
 * How to analyze the time and space complexity of basic array operations.
 * How to implement array operations using C++.
-
----
-
-## 📁 Folder Structure
-
-```text
-Unit-1_Array/
-│
-├── README.md
-│
-├── 1D_Array.cpp
-├── 2D_Array.cpp
-├── Array_Operations.cpp
-├── Greatest_Element.cpp
-│
-└── Screenshots/
-    ├── 1D_Array.png
-    ├── 2D_Array.png
-    ├── Array_Operations.png
-    └── Greatest_Element.png
-```
 
 ---
 
