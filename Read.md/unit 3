@@ -1,5 +1,5 @@
 Unit 3 – Queue
-📌 Introduction
+ Introduction
 
 A queue is a linear data structure that follows the FIFO (First In, First Out) principle. The element inserted first is the first element to be removed.
 
@@ -14,11 +14,11 @@ isEmpty – Checks whether the queue is empty.
 isFull – Checks whether the queue is full.
 Display – Displays all queue elements.
 1. Queue Using Array
-📌 Problem Statement
+ Problem Statement
 
 Create a queue of size M using an array and perform insertion, deletion, display, and empty/full checking operations.
 
-💡 Approach
+ Approach
 Define a queue using typedef struct queuetype.
 Create an array of size M.
 Use front to track the first element.
@@ -29,14 +29,14 @@ Delete elements using delel().
 Check whether the queue is empty using isempty().
 Check whether the queue is full using isfull().
 Display the queue elements using display().
-🧩 Structure Used
+ Structure Used
 typedef struct queuetype
 {
     int arr[M];
     int front;
     int rear;
 } queuetype;
-🛠️ Modular Functions
+ Modular Functions
 Function	Purpose
 initqueue()	Initializes front and rear
 newel()	Inserts an element into the queue
@@ -44,7 +44,7 @@ delel()	Deletes an element from the queue
 isempty()	Checks whether the queue is empty
 isfull()	Checks whether the queue is full
 display()	Displays queue elements
-📊 Queue Representation
+Queue Representation
 
 After inserting 10, 20, 30, 40, 50:
 
@@ -57,7 +57,7 @@ The first element 10 is removed first.
 This follows:
 
 FIFO → First In, First Out
-🔄 Insertion and Deletion
+ Insertion and Deletion
 Insertion
 
 New elements are inserted from the REAR.
@@ -90,7 +90,7 @@ Delete 10
 [10] [20] [30] [40]
       ↑
    next element
-📌 Empty Condition
+ Empty Condition
 
 The queue is initially empty when:
 
@@ -98,12 +98,12 @@ front == -1
 
 When the last element is deleted, both front and rear are reset to -1.
 
-📌 Full Condition
+ Full Condition
 
 For this array-based queue, the queue is full when:
 
 rear == M - 1
-⏱️ Time Complexity
+ Time Complexity
 Operation	Time Complexity
 Insertion	O(1)
 Deletion	O(1)
@@ -115,9 +115,9 @@ O(M)
 
 The array requires M locations to store the queue elements.
 
-📥 Sample Input
+ Sample Input
 10 20 30 40 50
-📤 Sample Output
+ Sample Output
 Queue is Empty
 
 10 inserted into queue
@@ -135,7 +135,7 @@ Queue is Full
 Queue elements are: 30 40 50
 Queue is Not Empty
 
-🎯 Learning Outcomes
+ Learning Outcomes
 
 After completing this program, I learned:
 
@@ -149,6 +149,6 @@ How to display queue elements.
 How to implement queue operations using modular functions.
 How to analyze the time and space complexity of queue operations.
 
-✅ Conclusion
+ Conclusion
 
 This program demonstrates the basic implementation of a queue using an array. It provides an understanding of the FIFO principle and the use of front and rear for performing insertion and deletion operations efficiently.
