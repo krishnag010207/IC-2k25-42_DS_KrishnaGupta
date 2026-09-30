@@ -1,12 +1,12 @@
 # Unit 1 – Array
 
-## 📌 Introduction
+##  Introduction
 
 This unit covers the basic concepts and operations of arrays in C++. The programs demonstrate one-dimensional arrays, two-dimensional arrays, searching, insertion, deletion, rotation, and finding the greatest element.
 
 ---
 
-## 📂 Programs Covered
+##  Programs Covered
 
 ### 1. One-Dimensional Array
 
@@ -173,7 +173,7 @@ Therefore, `C` is the greatest element.
 
 ---
 
-## 💻 Technologies Used
+##  Technologies Used
 
 * **Language:** C++
 * **Concept:** Array
@@ -197,7 +197,7 @@ Example:
 
 ---
 
-## 📊 Complexity Summary
+##  Complexity Summary
 
 | Program / Operation | Time Complexity | Space Complexity |
 | ------------------- | --------------: | ---------------: |
@@ -213,7 +213,7 @@ Example:
 
 ---
 
-## 🎯 Learning Outcomes
+##  Learning Outcomes
 
 After completing Unit 1, I learned:
 
@@ -229,6 +229,6 @@ After completing Unit 1, I learned:
 
 ---
 
-## ✅ Conclusion
+##  Conclusion
 
 Unit 1 provided the basic foundation for understanding arrays and their operations in C++. The programs demonstrate how arrays can be created, accessed, modified, searched, and processed efficiently.
