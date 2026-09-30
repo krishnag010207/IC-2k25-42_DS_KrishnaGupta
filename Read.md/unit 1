@@ -1,0 +1,258 @@
+# Unit 1 – Array
+
+## 📌 Introduction
+
+This unit covers the basic concepts and operations of arrays in C++. The programs demonstrate one-dimensional arrays, two-dimensional arrays, searching, insertion, deletion, rotation, and finding the greatest element.
+
+---
+
+## 📂 Programs Covered
+
+### 1. One-Dimensional Array
+
+**Problem Statement:**
+Create a one-dimensional array, store elements in it, and display the elements.
+
+**Approach:**
+
+1. Declare an array.
+2. Initialize the array with elements.
+3. Traverse the array using a `for` loop.
+4. Display each element.
+
+**Example:**
+
+```cpp
+int a[5] = {10, 20, 30, 40, 50};
+```
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(n)`
+
+---
+
+### 2. Two-Dimensional Array
+
+**Problem Statement:**
+Create a two-dimensional array, store elements in rows and columns, and display the elements.
+
+**Approach:**
+
+1. Declare a 2D array.
+2. Initialize its elements.
+3. Use nested `for` loops for traversal.
+4. Display the elements row by row.
+
+**Example:**
+
+```cpp
+int a[3][3] =
+{
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+```
+
+**Time Complexity:** `O(n × m)`
+**Space Complexity:** `O(n × m)`
+
+---
+
+### 3. Insert an Element in an Array
+
+**Problem Statement:**
+Insert an element at a specified position in a one-dimensional array.
+
+**Approach:**
+
+1. Start from the last element.
+2. Shift elements one position to the right.
+3. Insert the new element at the required position.
+4. Increase the size of the array.
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(1)`
+
+---
+
+### 4. Delete an Element from an Array
+
+**Problem Statement:**
+Delete an element from a specified position in an array.
+
+**Approach:**
+
+1. Start from the position of the element to be deleted.
+2. Shift all following elements one position to the left.
+3. Decrease the logical size of the array.
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(1)`
+
+---
+
+### 5. Search an Element in an Array
+
+**Problem Statement:**
+Search for a given element in an array and display its position if found.
+
+**Approach:**
+
+1. Traverse the array from the first element.
+2. Compare each element with the search value.
+3. If the element matches, display its index.
+4. If no match is found, display "Element not found."
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(1)`
+
+---
+
+### 6. Rotate an Array
+
+**Problem Statement:**
+Rotate the elements of an array by moving the first element to the last position.
+
+**Example:**
+
+```text
+Before Rotation:
+10 20 30 40 50
+
+After Rotation:
+20 30 40 50 10
+```
+
+**Approach:**
+
+1. Store the first element in a temporary variable.
+2. Shift all remaining elements one position to the left.
+3. Place the first element at the last position.
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(1)`
+
+---
+
+### 7. Find the Greatest Element in an Array
+
+**Problem Statement:**
+Create an array containing the elements `A, B, C` and find the greatest element.
+
+**Approach:**
+
+1. Store `A`, `B`, and `C` in an array.
+2. Assume the first element is the greatest.
+3. Compare it with the remaining elements.
+4. Update the greatest element whenever a larger element is found.
+5. Display the greatest element.
+
+**Example:**
+
+```text
+Array:
+A B C
+
+Greatest element:
+C
+```
+
+Since characters are compared according to their character/ASCII values:
+
+```text
+A = 65
+B = 66
+C = 67
+```
+
+Therefore, `C` is the greatest element.
+
+**Time Complexity:** `O(n)`
+**Space Complexity:** `O(1)`
+
+---
+
+## 💻 Technologies Used
+
+* **Language:** C++
+* **Concept:** Array
+* **Compiler:** Any standard C++ compiler
+* **Platform:** Windows / Linux
+
+---
+
+## 📸 Screenshots
+
+Screenshots of program outputs are stored in the `Screenshots` folder.
+
+Example:
+
+```markdown
+![1D Array Output](Screenshots/1D_Array.png)
+
+![2D Array Output](Screenshots/2D_Array.png)
+
+![Array Operations Output](Screenshots/Array_Operations.png)
+
+![Greatest Element Output](Screenshots/Greatest_Element.png)
+```
+
+---
+
+## 📊 Complexity Summary
+
+| Program / Operation | Time Complexity | Space Complexity |
+| ------------------- | --------------: | ---------------: |
+| Array Traversal     |            O(n) |             O(1) |
+| 2D Array Traversal  |        O(n × m) |             O(1) |
+| Insertion           |            O(n) |             O(1) |
+| Deletion            |            O(n) |             O(1) |
+| Searching           |            O(n) |             O(1) |
+| Rotation            |            O(n) |             O(1) |
+| Greatest Element    |            O(n) |             O(1) |
+
+> **Note:** The space complexity above refers to the **extra/auxiliary space** used by the operation. The array itself requires `O(n)` or `O(n × m)` storage.
+
+---
+
+## 🎯 Learning Outcomes
+
+After completing Unit 1, I learned:
+
+* How to declare and initialize one-dimensional arrays.
+* How to declare and work with two-dimensional arrays.
+* How to traverse array elements.
+* How to insert and delete elements from an array.
+* How to search for an element.
+* How to rotate an array.
+* How to find the greatest element in an array.
+* How to analyze the time and space complexity of basic array operations.
+* How to implement array operations using C++.
+
+---
+
+## 📁 Folder Structure
+
+```text
+Unit-1_Array/
+│
+├── README.md
+│
+├── 1D_Array.cpp
+├── 2D_Array.cpp
+├── Array_Operations.cpp
+├── Greatest_Element.cpp
+│
+└── Screenshots/
+    ├── 1D_Array.png
+    ├── 2D_Array.png
+    ├── Array_Operations.png
+    └── Greatest_Element.png
+```
+
+---
+
+## ✅ Conclusion
+
+Unit 1 provided the basic foundation for understanding arrays and their operations in C++. The programs demonstrate how arrays can be created, accessed, modified, searched, and processed efficiently.
