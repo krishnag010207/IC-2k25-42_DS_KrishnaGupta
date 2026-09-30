@@ -1,0 +1,261 @@
+# Unit 2 – Stack
+
+## 📌 Introduction
+
+A **stack** is a linear data structure that follows the **LIFO (Last In, First Out)** principle. The element inserted last is the first element to be removed.
+
+Common stack operations include:
+
+* **Push** – Insert an element into the stack.
+* **Pop** – Remove the top element from the stack.
+* **Peek** – View the top element without removing it.
+* **isEmpty** – Check whether the stack is empty.
+* **isFull** – Check whether the stack is full.
+* **Display** – Display the elements of the stack.
+
+This unit contains programs demonstrating stack implementation using vectors and arrays, two stacks using a single array, and character stack operations.
+
+---
+
+# 📂 Programs Covered
+
+## 1. Stack Using Vector
+
+### 📌 Problem Statement
+
+Create a stack using a C++ vector and perform basic stack operations such as checking whether the stack is empty or full, finding its size, displaying elements, pushing multiple elements, and popping multiple elements.
+
+### 💡 Approach
+
+1. Create a vector named `stack`.
+2. Insert elements using `push_back()`.
+3. Check whether the stack is empty using `empty()`.
+4. Check the stack size using `size()`.
+5. Display the elements using a loop.
+6. Insert additional elements using `push_back()`.
+7. Access the top element using `back()`.
+8. Remove elements using `pop_back()`.
+
+### 🛠️ Functions / Methods Used
+
+| Function      | Purpose                            |
+| ------------- | ---------------------------------- |
+| `push_back()` | Inserts an element                 |
+| `pop_back()`  | Removes the top element            |
+| `back()`      | Returns the top element            |
+| `empty()`     | Checks whether the vector is empty |
+| `size()`      | Returns the number of elements     |
+
+### ⏱️ Complexity
+
+| Operation     | Time Complexity |
+| ------------- | --------------: |
+| `push_back()` |           O(1)* |
+| `pop_back()`  |            O(1) |
+| `back()`      |            O(1) |
+| `empty()`     |            O(1) |
+| `size()`      |            O(1) |
+| Display       |            O(n) |
+
+* `push_back()` is O(1) amortized.
+
+
+---
+
+# 2. Stack Using Array
+
+### 📌 Problem Statement
+
+Create a stack of size `M` using an array and perform stack operations such as initialization, checking empty/full conditions, insertion, deletion, peek, and display.
+
+### 💡 Approach
+
+1. Define the stack using `typedef struct stacktype`.
+2. Store the elements in an array.
+3. Use `top` to keep track of the top element.
+4. Initialize `top` to `-1` using `initstack()`.
+5. Insert elements using `newel()`.
+6. Remove elements using `delel()`.
+7. Check the top element using `peek()`.
+8. Display the stack using `display()`.
+
+### 🧩 Modular Functions
+
+```text
+initstack()
+     ↓
+newel()
+     ↓
+delel()
+     ↓
+peek()
+     ↓
+isempty()
+     ↓
+isfull()
+     ↓
+display()
+```
+
+### 📊 Example
+
+```text
+Stack:
+10 20 30 40 50
+             ↑
+            TOP
+
+Peek = 50
+```
+
+### ⏱️ Complexity
+
+| Operation | Time Complexity |
+| --------- | --------------: |
+| Push      |            O(1) |
+| Pop       |            O(1) |
+| Peek      |            O(1) |
+| isEmpty   |            O(1) |
+| isFull    |            O(1) |
+| Display   |            O(n) |
+
+
+
+---
+
+# 3. Two Stacks in One Array
+
+### 📌 Problem Statement
+
+Implement two stacks using a single array of size `M`.
+
+### 💡 Approach
+
+Two stacks share the same array.
+
+* **Stack 1** grows from left to right.
+* **Stack 2** grows from right to left.
+* `top1` keeps track of Stack 1.
+* `top2` keeps track of Stack 2.
+
+### 📊 Representation
+
+```text
+Stack 1 → → →          ← ← ← Stack 2
+
+[10][20][30][  ][  ][  ][  ][80][90][100]
+     ↑                              ↑
+    top1                            top2
+```
+
+### 🧩 Functions Used
+
+* `initstack()`
+* `isempty1()`
+* `isempty2()`
+* `isfull()`
+* `newel1()`
+* `newel2()`
+* `delel1()`
+* `delel2()`
+* `display1()`
+* `display2()`
+
+### 📌 Full Condition
+
+The array is full when:
+
+```cpp
+top1 + 1 == top2
+```
+
+### ⏱️ Complexity
+
+| Operation        | Time Complexity |
+| ---------------- | --------------: |
+| Push in Stack 1  |            O(1) |
+| Push in Stack 2  |            O(1) |
+| Pop from Stack 1 |            O(1) |
+| Pop from Stack 2 |            O(1) |
+| Display          |            O(n) |
+
+
+---
+
+# 4. Character Stack and Peek
+
+### 📌 Problem Statement
+
+Create a stack of size `M`, insert the characters `A`, `B`, `C`, `D`, and `E`, and find the peek element.
+
+### 💡 Approach
+
+1. Create a character stack using `typedef struct stacktype`.
+2. Initialize `top` to `-1`.
+3. Insert `A`, `B`, `C`, `D`, and `E` using `newel()`.
+4. Display the stack.
+5. Use `peek()` to find the top element.
+
+### 📊 Example
+
+```text
+Stack elements:
+
+A B C D E
+        ↑
+       TOP
+
+Peek = E
+```
+
+Since `E` is inserted last, it is the top/peek element.
+
+### ⏱️ Complexity
+
+| Operation | Time Complexity |
+| --------- | --------------: |
+| Push      |            O(1) |
+| Peek      |            O(1) |
+| Display   |            O(n) |
+
+
+
+---
+
+# 📊 Overall Complexity Summary
+
+| Program                 | Main Operations | Time Complexity |
+| ----------------------- | --------------- | --------------: |
+| Stack Using Vector      | Push, Pop, Peek |            O(1) |
+| Stack Using Array       | Push, Pop, Peek |            O(1) |
+| Two Stacks in One Array | Push, Pop       |            O(1) |
+| Character Stack         | Push, Peek      |            O(1) |
+| Display                 | Traversal       |            O(n) |
+
+---
+
+
+
+---
+
+# 🎯 Learning Outcomes
+
+After completing Unit 2, I learned:
+
+* The concept of a stack and the **LIFO** principle.
+* How to implement a stack using a C++ vector.
+* How to implement a fixed-size stack using an array.
+* How to use `top` to track the top element.
+* How to perform push and pop operations.
+* How to find the peek element.
+* How to check whether a stack is empty or full.
+* How to implement two stacks using a single array.
+* How to implement a character stack.
+* How to implement stack operations using modular functions.
+* How to analyze the time complexity of stack operations.
+
+---
+
+# ✅ Conclusion
+
+Unit 2 demonstrates the implementation and basic operations of stacks using different approaches. The programs provide practical understanding of the LIFO principle, stack operations, array-based implementation, vector-based implementation, and efficient use of memory through two stacks in a single array.
