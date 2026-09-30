@@ -1,0 +1,170 @@
+#include <iostream>
+using namespace std;
+
+#define M 10 //yaha se quantity change ki to jaha jah M likha vaha automatically change ho jayegi
+
+typedef struct stacktype
+{
+    int arr[M];
+    int top1;
+    int top2;
+} stacktype;
+
+void initstack(stacktype &s)
+{
+    s.top1 = -1;
+    s.top2 = M;
+}
+
+void isfull(stacktype s)
+{
+    if(s.top1 + 1 == s.top2)
+        cout << "Array is Full" << endl;
+    else
+        cout << "Array is Not Full" << endl;
+}
+
+void isempty1(stacktype s)
+{
+    if(s.top1 == -1)
+        cout << "Stack 1 is Empty" << endl;
+    else
+        cout << "Stack 1 is Not Empty" << endl;
+}
+
+void isempty2(stacktype s)
+{
+    if(s.top2 == M)
+        cout << "Stack 2 is Empty" << endl;
+    else
+        cout << "Stack 2 is Not Empty" << endl;
+}
+
+void newel1(stacktype &s, int x)
+{
+    if(s.top1 + 1 == s.top2)
+    {
+        cout << "Array is Full. Cannot push into Stack 1" << endl;
+    }
+    else
+    {
+        s.top1++;
+        s.arr[s.top1] = x;
+        cout << x << " pushed into Stack 1" << endl;
+    }
+}
+
+void newel2(stacktype &s, int x)
+{
+    if(s.top1 + 1 == s.top2)
+    {
+        cout << "Array is Full. Cannot push into Stack 2" << endl;
+    }
+    else
+    {
+        s.top2--;
+        s.arr[s.top2] = x;
+        cout << x << " pushed into Stack 2" << endl;
+    }
+}
+
+void delel1(stacktype &s)
+{
+    if(s.top1 == -1)
+    {
+        cout << "Stack 1 is Empty. Cannot pop" << endl;
+    }
+    else
+    {
+        cout << s.arr[s.top1] << " popped from Stack 1" << endl;
+        s.top1--;
+    }
+}
+
+void delel2(stacktype &s)
+{
+    if(s.top2 == M)
+    {
+        cout << "Stack 2 is Empty. Cannot pop" << endl;
+    }
+    else
+    {
+        cout << s.arr[s.top2] << " popped from Stack 2" << endl;
+        s.top2++;
+    }
+}
+
+void display1(stacktype s)
+{
+    cout << "Stack 1: ";
+
+    if(s.top1 == -1)
+    {
+        cout << "Empty" << endl;
+    }
+    else
+    {
+        for(int i = 0; i <= s.top1; i++)
+            cout << s.arr[i] << " ";
+
+        cout << endl;
+    }
+}
+
+void display2(stacktype s)
+{
+    cout << "Stack 2: ";
+
+    if(s.top2 == M)
+    {
+        cout << "Empty" << endl;
+    }
+    else
+    {
+        for(int i = M - 1; i >= s.top2; i--)
+            cout << s.arr[i] << " ";
+
+        cout << endl;
+    }
+}
+
+int main()
+{
+    stacktype s;
+
+    initstack(s);
+
+    isempty1(s);
+    isempty2(s);
+
+    cout << endl;
+
+    newel1(s, 10);
+    newel1(s, 20);
+    newel1(s, 30);
+
+    newel2(s, 100);
+    newel2(s, 90);
+    newel2(s, 80);
+
+    cout << endl;
+
+    display1(s);
+    display2(s);
+
+    cout << endl;
+
+    isfull(s);
+
+    cout << endl;
+
+    delel1(s);
+    delel2(s);
+
+    cout << endl;
+
+    display1(s);
+    display2(s);
+
+    return 0;
+}
