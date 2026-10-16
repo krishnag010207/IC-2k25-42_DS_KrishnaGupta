@@ -334,29 +334,6 @@ Auxiliary Space: O(1)
 
 Note: The space complexity shown above represents the extra/auxiliary space used by the operation. The array itself requires O(n) storage.
 
-📸 Screenshots
-Screenshots of the program outputs can be stored inside the Screenshots folder.
-Example
-unit1/
-│
-├── README.md
-│
-├── 1D_Array.cpp
-├── 2D_Array.cpp
-├── Array_Insertion.cpp
-├── Array_Deletion.cpp
-├── Array_Search.cpp
-├── Array_Rotation.cpp
-├── Greatest_Element.cpp
-│
-└── Screenshots/
-    ├── 1D_Array.png
-    ├── 2D_Array.png
-    ├── Array_Insertion.png
-    ├── Array_Deletion.png
-    ├── Array_Search.png
-    ├── Array_Rotation.png
-    └── Greatest_Element.png
 
 🎓 Learning Outcomes
 After completing Unit 1, I learned:
