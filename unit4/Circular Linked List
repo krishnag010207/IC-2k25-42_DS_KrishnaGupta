@@ -1,0 +1,412 @@
+
+#include <iostream>
+#include <limits>
+using namespace std;
+
+// Node structure for Circular Linked List
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Create a new node
+Node* createNode(int value) {
+    Node* newNode = new Node;
+
+    newNode->data = value;
+    newNode->next = nullptr;
+
+    return newNode;
+}
+
+// Display all nodes in the circular linked list
+void displayList(Node* head) {
+    if (head == nullptr) {
+        cout << "List is empty.\n";
+        return;
+    }
+
+    Node* temp = head;
+
+    cout << "Circular Linked List: ";
+
+    // Stop when traversal returns to the head
+    do {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    } while (temp != head);
+
+    cout << "(back to head)\n";
+}
+
+// Insert a node at the beginning
+void insertAtBeginning(Node*& head, int value) {
+    Node* newNode = createNode(value);
+
+    if (head == nullptr) {
+        head = newNode;
+        newNode->next = head;
+        cout << "Node inserted successfully.\n";
+        return;
+    }
+
+    Node* last = head;
+
+    // Find the last node
+    while (last->next != head) {
+        last = last->next;
+    }
+
+    newNode->next = head;
+    last->next = newNode;
+    head = newNode;
+
+    cout << "Node inserted successfully.\n";
+}
+
+// Insert a node at the end
+void insertAtEnd(Node*& head, int value) {
+    Node* newNode = createNode(value);
+
+    if (head == nullptr) {
+        head = newNode;
+        newNode->next = head;
+        cout << "Node inserted successfully.\n";
+        return;
+    }
+
+    Node* last = head;
+
+    while (last->next != head) {
+        last = last->next;
+    }
+
+    last->next = newNode;
+    newNode->next = head;
+
+    cout << "Node inserted successfully.\n";
+}
+
+// Insert a node at a 1-based position
+void insertAtPosition(Node*& head, int value, int position) {
+    if (position <= 0) {
+        cout << "Invalid position. Use positions starting from 1.\n";
+        return;
+    }
+
+    if (position == 1) {
+        insertAtBeginning(head, value);
+        return;
+    }
+
+    if (head == nullptr) {
+        cout << "Invalid position. The list is empty.\n";
+        return;
+    }
+
+    Node* temp = head;
+
+    for (int i = 1; i < position - 1 && temp->next != head; i++) {
+        temp = temp->next;
+    }
+
+    // Check whether the requested position exists
+    if (position > 1 && temp->next == head && position - 1 > 1) {
+        int count = 1;
+        Node* current = head;
+
+        while (current->next != head) {
+            count++;
+            current = current->next;
+        }
+
+        if (position > count + 1) {
+            cout << "Invalid position.\n";
+            return;
+        }
+    }
+
+    if (temp->next == head && position > 1) {
+        // Insert after the last node
+        Node* newNode = createNode(value);
+        temp->next = newNode;
+        newNode->next = head;
+        cout << "Node inserted successfully.\n";
+        return;
+    }
+
+    Node* newNode = createNode(value);
+    newNode->next = temp->next;
+    temp->next = newNode;
+
+    cout << "Node inserted successfully.\n";
+}
+
+// Delete the first node
+void deleteFromBeginning(Node*& head) {
+    if (head == nullptr) {
+        cout << "List is empty. Nothing to delete.\n";
+        return;
+    }
+
+    Node* temp = head;
+
+    // If there is only one node
+    if (head->next == head) {
+        delete head;
+        head = nullptr;
+        cout << "First node deleted successfully.\n";
+        return;
+    }
+
+    Node* last = head;
+
+    while (last->next != head) {
+        last = last->next;
+    }
+
+    head = head->next;
+    last->next = head;
+
+    delete temp;
+
+    cout << "First node deleted successfully.\n";
+}
+
+// Delete the last node
+void deleteFromEnd(Node*& head) {
+    if (head == nullptr) {
+        cout << "List is empty. Nothing to delete.\n";
+        return;
+    }
+
+    // If there is only one node
+    if (head->next == head) {
+        delete head;
+        head = nullptr;
+        cout << "Last node deleted successfully.\n";
+        return;
+    }
+
+    Node* temp = head;
+
+    while (temp->next->next != head) {
+        temp = temp->next;
+    }
+
+    delete temp->next;
+    temp->next = head;
+
+    cout << "Last node deleted successfully.\n";
+}
+
+// Delete a node at a 1-based position
+void deleteAtPosition(Node*& head, int position) {
+    if (head == nullptr) {
+        cout << "List is empty. Nothing to delete.\n";
+        return;
+    }
+
+    if (position <= 0) {
+        cout << "Invalid position.\n";
+        return;
+    }
+
+    if (position == 1) {
+        deleteFromBeginning(head);
+        return;
+    }
+
+    Node* temp = head;
+    int currentPosition = 1;
+
+    while (currentPosition < position - 1 &&
+           temp->next != head) {
+        temp = temp->next;
+        currentPosition++;
+    }
+
+    if (temp->next == head) {
+        cout << "Invalid position.\n";
+        return;
+    }
+
+    Node* nodeToDelete = temp->next;
+    temp->next = nodeToDelete->next;
+
+    delete nodeToDelete;
+
+    cout << "Node deleted successfully.\n";
+}
+
+// Search for an element
+void searchElement(Node* head, int value) {
+    if (head == nullptr) {
+        cout << "List is empty.\n";
+        return;
+    }
+
+    Node* temp = head;
+    int position = 1;
+
+    do {
+        if (temp->data == value) {
+            cout << "Element found at position "
+                 << position << ".\n";
+            return;
+        }
+
+        temp = temp->next;
+        position++;
+
+    } while (temp != head);
+
+    cout << "Element not found.\n";
+}
+
+// Reverse the circular linked list
+void reverseList(Node*& head) {
+    if (head == nullptr || head->next == head) {
+        cout << "List does not need reversing.\n";
+        return;
+    }
+
+    Node* previous = nullptr;
+    Node* current = head;
+    Node* nextNode = nullptr;
+    Node* oldHead = head;
+
+    do {
+        nextNode = current->next;
+        current->next = previous;
+        previous = current;
+        current = nextNode;
+    } while (current != oldHead);
+
+    oldHead->next = previous;
+    head = previous;
+
+    cout << "List reversed successfully.\n";
+}
+
+// Release all dynamically allocated nodes
+void deleteEntireList(Node*& head) {
+    if (head == nullptr) {
+        return;
+    }
+
+    Node* current = head->next;
+
+    while (current != head) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
+
+    delete head;
+    head = nullptr;
+}
+
+// Safely read an integer
+bool readInteger(int& value) {
+    if (cin >> value) {
+        return true;
+    }
+
+    cout << "Invalid input. Please enter an integer.\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    return false;
+}
+
+// Main function
+int main() {
+    Node* head = nullptr;
+    int choice, value, position;
+
+    do {
+        cout << "\n====================================\n";
+        cout << "       CIRCULAR LINKED LIST\n";
+        cout << "====================================\n";
+        cout << "1. Insert at Beginning\n";
+        cout << "2. Insert at End\n";
+        cout << "3. Insert at Position\n";
+        cout << "4. Delete from Beginning\n";
+        cout << "5. Delete from End\n";
+        cout << "6. Delete at Position\n";
+        cout << "7. Display List\n";
+        cout << "8. Search Element\n";
+        cout << "9. Reverse List\n";
+        cout << "10. Exit\n";
+        cout << "Enter your choice: ";
+
+        if (!readInteger(choice)) {
+            continue;
+        }
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value: ";
+                if (readInteger(value))
+                    insertAtBeginning(head, value);
+                break;
+
+            case 2:
+                cout << "Enter value: ";
+                if (readInteger(value))
+                    insertAtEnd(head, value);
+                break;
+
+            case 3:
+                cout << "Enter value: ";
+                if (!readInteger(value)) break;
+
+                cout << "Enter position: ";
+                if (readInteger(position))
+                    insertAtPosition(head, value, position);
+                break;
+
+            case 4:
+                deleteFromBeginning(head);
+                break;
+
+            case 5:
+                deleteFromEnd(head);
+                break;
+
+            case 6:
+                cout << "Enter position: ";
+                if (readInteger(position))
+                    deleteAtPosition(head, position);
+                break;
+
+            case 7:
+                displayList(head);
+                break;
+
+            case 8:
+                cout << "Enter value to search: ";
+                if (readInteger(value))
+                    searchElement(head, value);
+                break;
+
+            case 9:
+                reverseList(head);
+                break;
+
+            case 10:
+                deleteEntireList(head);
+                cout << "Memory released. Program terminated.\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+
+    } while (choice != 10);
+
+    // Ensure allocated memory is released
+    deleteEntireList(head);
+
+    return 0;
+}
