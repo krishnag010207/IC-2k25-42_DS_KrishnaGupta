@@ -1,0 +1,266 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+typedef vector<vector<int>> Matrix;
+
+// Input a matrix
+Matrix inputMatrix(int& rows, int& cols) {
+    cout << "Enter number of rows: ";
+    cin >> rows;
+
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    if (rows <= 0 || cols <= 0) {
+        cout << "Invalid matrix dimensions.\n";
+        rows = cols = 0;
+        return {};
+    }
+
+    Matrix A(rows, vector<int>(cols));
+
+    cout << "Enter matrix elements:\n";
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> A[i][j];
+        }
+    }
+
+    return A;
+}
+
+// Display a matrix
+void displayMatrix(const Matrix& A) {
+    if (A.empty()) {
+        cout << "No matrix available.\n";
+        return;
+    }
+
+    for (const auto& row : A) {
+        for (int value : row) {
+            cout << value << "\t";
+        }
+        cout << "\n";
+    }
+}
+
+// Addition of two matrices
+Matrix addMatrices(const Matrix& A, const Matrix& B) {
+    int rows = A.size();
+    int cols = A[0].size();
+
+    Matrix C(rows, vector<int>(cols, 0));
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+
+    return C;
+}
+
+// Multiplication of two matrices
+Matrix multiplyMatrices(const Matrix& A, const Matrix& B) {
+    int rows = A.size();
+    int cols = B[0].size();
+    int common = B.size();
+
+    Matrix C(rows, vector<int>(cols, 0));
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            for (int k = 0; k < common; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    return C;
+}
+
+// Transpose of a matrix
+Matrix transposeMatrix(const Matrix& A) {
+    int rows = A.size();
+    int cols = A[0].size();
+
+    Matrix T(cols, vector<int>(rows));
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            T[j][i] = A[i][j];
+        }
+    }
+
+    return T;
+}
+
+// Create a minor matrix by removing one row and one column
+Matrix getMinor(const Matrix& A, int row, int col) {
+    int n = A.size();
+    Matrix minorMatrix;
+
+    for (int i = 0; i < n; i++) {
+        if (i == row) continue;
+
+        vector<int> minorRow;
+
+        for (int j = 0; j < n; j++) {
+            if (j == col) continue;
+
+            minorRow.push_back(A[i][j]);
+        }
+
+        minorMatrix.push_back(minorRow);
+    }
+
+    return minorMatrix;
+}
+
+// Calculate determinant recursively
+long long determinant(const Matrix& A) {
+    int n = A.size();
+
+    // Base case: determinant of 1x1 matrix
+    if (n == 1) {
+        return A[0][0];
+    }
+
+    // Base case: determinant of 2x2 matrix
+    if (n == 2) {
+        return 1LL * A[0][0] * A[1][1]
+             - 1LL * A[0][1] * A[1][0];
+    }
+
+    long long det = 0;
+
+    // Expansion along first row
+    for (int j = 0; j < n; j++) {
+        Matrix minorMatrix = getMinor(A, 0, j);
+
+        long long sign = (j % 2 == 0) ? 1 : -1;
+
+        det += sign * A[0][j]
+             * determinant(minorMatrix);
+    }
+
+    return det;
+}
+
+// Menu-driven main function
+int main() {
+    int choice;
+
+    do {
+        cout << "\n=================================\n";
+        cout << "        MATRIX CALCULATOR\n";
+        cout << "=================================\n";
+        cout << "1. Matrix Addition\n";
+        cout << "2. Matrix Multiplication\n";
+        cout << "3. Matrix Transpose\n";
+        cout << "4. Matrix Determinant\n";
+        cout << "5. Exit\n";
+        cout << "=================================\n";
+        cout << "Enter choice: ";
+
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                int r1, c1, r2, c2;
+
+                cout << "\nEnter first matrix:\n";
+                Matrix A = inputMatrix(r1, c1);
+
+                if (A.empty()) break;
+
+                cout << "\nEnter second matrix:\n";
+                Matrix B = inputMatrix(r2, c2);
+
+                if (B.empty()) break;
+
+                if (r1 != r2 || c1 != c2) {
+                    cout << "Addition not possible.\n";
+                    break;
+                }
+
+                Matrix C = addMatrices(A, B);
+
+                cout << "\nResult of Addition:\n";
+                displayMatrix(C);
+                break;
+            }
+
+            case 2: {
+                int r1, c1, r2, c2;
+
+                cout << "\nEnter first matrix:\n";
+                Matrix A = inputMatrix(r1, c1);
+
+                if (A.empty()) break;
+
+                cout << "\nEnter second matrix:\n";
+                Matrix B = inputMatrix(r2, c2);
+
+                if (B.empty()) break;
+
+                if (c1 != r2) {
+                    cout << "Multiplication not possible.\n";
+                    break;
+                }
+
+                Matrix C = multiplyMatrices(A, B);
+
+                cout << "\nResult of Multiplication:\n";
+                displayMatrix(C);
+                break;
+            }
+
+            case 3: {
+                int rows, cols;
+
+                cout << "\nEnter matrix:\n";
+                Matrix A = inputMatrix(rows, cols);
+
+                if (A.empty()) break;
+
+                Matrix T = transposeMatrix(A);
+
+                cout << "\nTranspose Matrix:\n";
+                displayMatrix(T);
+                break;
+            }
+
+            case 4: {
+                int rows, cols;
+
+                cout << "\nEnter matrix:\n";
+                Matrix A = inputMatrix(rows, cols);
+
+                if (A.empty()) break;
+
+                if (rows != cols) {
+                    cout << "Determinant requires a square matrix.\n";
+                    break;
+                }
+
+                cout << "\nDeterminant = "
+                     << determinant(A) << "\n";
+                break;
+            }
+
+            case 5:
+                cout << "Program terminated.\n";
+                break;
+
+            default:
+                cout << "Invalid choice.\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
