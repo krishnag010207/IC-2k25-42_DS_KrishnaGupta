@@ -1,0 +1,240 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Structure to store a sparse matrix in triple form
+struct SparseMatrix {
+    int rows, cols;
+    vector<vector<int>> triplet;
+};
+
+// Input matrix and convert it into triple representation
+SparseMatrix inputSparseMatrix() {
+    SparseMatrix s;
+    int value;
+
+    cout << "Enter number of rows: ";// rows daalo 
+    cin >> s.rows;
+
+    cout << "Enter number of columns: ";//column daalo
+    cin >> s.cols;
+
+    if (s.rows <= 0 || s.cols <= 0) {
+        cout << "Invalid matrix dimensions.\n";//agr row or column -> 0 to invalid matrix h 
+        s.rows = s.cols = 0;
+        return s;//but rows=coloumns=0 to sparse
+    }
+
+    // First row stores dimensions and non-zero count
+    s.triplet.push_back({s.rows, s.cols, 0});
+
+    cout << "Enter matrix elements:\n";
+
+    for (int i = 0; i < s.rows; i++) {
+        for (int j = 0; j < s.cols; j++) {
+            cin >> value;
+
+            if (value != 0) {
+                s.triplet.push_back({i, j, value});
+                s.triplet[0][2]++;
+            }
+        }
+    }
+
+    return s;
+}
+
+// Display the matrix in triple representation
+void displayTriplet(const SparseMatrix& s) {
+    if (s.rows == 0 || s.cols == 0) {
+        cout << "No matrix available.\n";
+        return;
+    }
+
+    cout << "\nTriple Representation:\n";
+    cout << "Row\tColumn\tValue\n";
+
+    for (const auto& row : s.triplet) {
+        cout << row[0] << "\t"
+             << row[1] << "\t"
+             << row[2] << "\n";
+    }
+}
+
+// Display the original matrix
+void displayMatrix(const SparseMatrix& s) {
+    if (s.rows == 0 || s.cols == 0) {
+        cout << "No matrix available.\n";
+        return;
+    }
+
+    vector<vector<int>> matrix(
+        s.rows, vector<int>(s.cols, 0));
+
+    for (int i = 1; i < (int)s.triplet.size(); i++) {
+        int r = s.triplet[i][0];
+        int c = s.triplet[i][1];
+        int v = s.triplet[i][2];
+
+        matrix[r][c] = v;
+    }
+
+    cout << "\nOriginal Matrix:\n";
+
+    for (const auto& row : matrix) {
+        for (int value : row) {
+            cout << value << "\t";
+        }
+        cout << "\n";
+    }
+}
+
+// Transpose a sparse matrix
+SparseMatrix transposeMatrix(const SparseMatrix& s) {
+    SparseMatrix t;
+
+    if (s.rows == 0 || s.cols == 0) {
+        return t;
+    }
+
+    t.rows = s.cols;
+    t.cols = s.rows;
+
+    t.triplet.push_back({t.rows, t.cols, s.triplet[0][2]});
+
+    // Visit columns of original matrix in order
+    for (int col = 0; col < s.cols; col++) {
+        for (int i = 1; i < (int)s.triplet.size(); i++) {
+            if (s.triplet[i][1] == col) {
+                t.triplet.push_back({
+                    s.triplet[i][1],
+                    s.triplet[i][0],
+                    s.triplet[i][2]
+                });
+            }
+        }
+    }
+
+    return t;
+}
+
+// Add two sparse matrices
+SparseMatrix addMatrices(
+    const SparseMatrix& a,
+    const SparseMatrix& b) {
+
+    SparseMatrix result;
+
+    if (a.rows == 0 || b.rows == 0) {
+        cout << "Both matrices must be valid.\n";
+        return result;
+    }
+
+    if (a.rows != b.rows || a.cols != b.cols) {
+        cout << "Addition not possible. Dimensions differ.\n";
+        return result;
+    }
+
+    result.rows = a.rows;
+    result.cols = a.cols;
+
+    vector<vector<int>> dense(
+        result.rows, vector<int>(result.cols, 0));
+
+    // Add elements of first matrix
+    for (int i = 1; i < (int)a.triplet.size(); i++) {
+        int r = a.triplet[i][0];
+        int c = a.triplet[i][1];
+        dense[r][c] += a.triplet[i][2];
+    }
+
+    // Add elements of second matrix
+    for (int i = 1; i < (int)b.triplet.size(); i++) {
+        int r = b.triplet[i][0];
+        int c = b.triplet[i][1];
+        dense[r][c] += b.triplet[i][2];
+    }
+
+    // Convert result back to triple representation
+    int nonZero = 0;
+
+    result.triplet.push_back({result.rows, result.cols, 0});
+
+    for (int i = 0; i < result.rows; i++) {
+        for (int j = 0; j < result.cols; j++) {
+            if (dense[i][j] != 0) {
+                result.triplet.push_back({
+                    i, j, dense[i][j]
+                });
+                nonZero++;
+            }
+        }
+    }
+
+    result.triplet[0][2] = nonZero;
+
+    return result;
+}
+
+// Menu-driven main function
+int main() {
+    SparseMatrix A;
+    int choice;
+
+    do {
+        cout << "\n===== SPARSE MATRIX =====\n";
+        cout << "1. Input Matrix\n";
+        cout << "2. Display Triple Representation\n";
+        cout << "3. Display Original Matrix\n";
+        cout << "4. Transpose Matrix\n";
+        cout << "5. Add Two Sparse Matrices\n";
+        cout << "6. Exit\n";
+        cout << "Enter choice: ";
+
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                A = inputSparseMatrix();
+                break;
+
+            case 2:
+                displayTriplet(A);
+                break;
+
+            case 3:
+                displayMatrix(A);
+                break;
+
+            case 4: {
+                SparseMatrix T = transposeMatrix(A);
+                cout << "\nTranspose:\n";
+                displayTriplet(T);
+                break;
+            }
+
+            case 5: {
+                cout << "\nEnter second matrix:\n";
+                SparseMatrix B = inputSparseMatrix();
+
+                SparseMatrix C = addMatrices(A, B);
+
+                cout << "\nAddition Result:\n";
+                displayTriplet(C);
+                displayMatrix(C);
+                break;
+            }
+
+            case 6:
+                cout << "Program terminated.\n";
+                break;
+
+            default:
+                cout << "Invalid choice.\n";
+        }
+
+    } while (choice != 6);
+
+    return 0;
+}
